@@ -1,0 +1,27 @@
+{%extends "../master.html"%}
+
+{%block content%}
+<center>
+    <form method="post" action="/AddToCart">
+        {%csrf_token%}
+    <table class="table">
+        <tr><th colspan="2" ><h3 align="center">Cake Details</h1></th></tr>
+        <tr><td>Cake Id</td><td>{{cake.id}}
+            <input type="hidden" name="cakeid" value="{{cake.id}}"/>
+        </td></tr>
+        <tr><td>Cake Name</td><td>{{cake.cakename}}</td></tr>
+        <tr><td>Cake Description</td><td>{{cake.description}}</td></tr>
+        <tr><td>Cake Price</td><td>{{cake.price}}</td></tr>
+        <tr><td>Cake Category</td><td>{{cake.category.cname}}</td></tr>
+        <tr><td>Select Quantity</td><td><select name="qty">
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+        </select></td></tr>
+        <tr><td><button type="submit" class="button btn-danger" >Add To Cart</button></td><td></td></tr>
+    </table>
+</form>
+</center>
+{%endblock%}
