@@ -1,0 +1,35 @@
+1.Create project.
+2.Create 2 apps ->a.UserApp,  b.AdminApp
+3. Inside AdminApp create two models (Category and Cake)
+4. AdminApp -> AdminModel (admin.py within UserApp
+7. Create templates folder in root directory.
+8.Goto settings.py file 
+
+import os
+
+Installed App -> 'AdminApp','UserApp',
+Templates ->  'DIRS': [BASE_DIR / 'templates'],
+Database ->   'NAME': 'cakeshodb.db',
+
+
+
+For Images
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'
+
+
+9. goto urls.py of project folder :-
+from . import settings
+from django.contrib.staticfiles.urls import static
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
+
+
+
+urlpatterns += staticfiles_urlpatterns()
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+
+10.
+5.Create SuperUser 
+6. Runserver and login as admin. 
+  Add Category and Cake
