@@ -1,0 +1,56 @@
+{%extends "../master.html"%}
+
+{%block content%}
+
+<script type="text/javascript">
+function increment(val)
+{
+    var txtId = "qty"+val;
+    var num = parseInt(document.getElementById(txtId).value);
+    num++;
+    document.getElementById(txtId).value = num;
+
+}
+function decrement(val)
+{
+    var txtId = "qty"+val;
+    var num = parseInt(document.getElementById(txtId).value);
+    num--;
+    document.getElementById(txtId).value = num;    
+}
+</script>
+<center>
+    <table class="table">
+        <tr><th>Cake Id</th><th>Cake Name</th><th>Price</th><th>Quantity</th></tr>
+       {%for cart in carts%}
+       <form method="post" action="UpdateCart">
+           {%csrf_token%}
+        
+        <tr><td>{{cart.cake.id}}
+            <input type="hidden" name="cakeid" value="{{cart.cake.id}}"/>
+        </td><td>{{cart.cake.cakename}}</td>
+        <td>{{cart.cake.price}}</td>
+        <td>
+            <div class="card">
+            <button type="button" class="btn btn-warning" onclick="decrement('{{cart.cake.id}}');">-</button>
+             <input type="text" value="{{cart.qty}}" size="4" name="qty" id="qty{{cart.cake.id}}"/>
+            <button type="button"  class="btn btn-warning" onclick="increment('{{cart.cake.id}}');">+</button>
+            </div>
+        
+        </td>
+        <td><button type="submit" class="btn btn-danger" name="action" 
+            value="update">Update</button></td>
+        <td><button type="submit" class="btn btn-danger" 
+            name="action" value="remove">Remove</button></td>
+    </form>
+    </tr>
+       {%endfor%}       
+    </table>
+    <hr/>
+
+    
+</center>
+<h3>Total : {{request.session.total}}    </h3>
+<h3><a href="/MakePayment" >Order Now</a></h3>
+
+{%endblock%}
